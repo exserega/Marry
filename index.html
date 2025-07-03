@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свадьба Анны и Михаила</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка сайта с развивающейся тканью -->
+    <header class="header">
+        <div class="fabric-animation">
+            <div class="fabric-layer fabric-layer-1"></div>
+            <div class="fabric-layer fabric-layer-2"></div>
+            <div class="fabric-layer fabric-layer-3"></div>
+        </div>
+        <div class="header-content">
+            <h1 class="couple-names">Анна & Михаил</h1>
+            <p class="wedding-date">15 июня 2024</p>
+            <p class="wedding-subtitle">Приглашаем разделить с нами радость этого особенного дня</p>
+        </div>
+    </header>
+
+    <!-- Приветственная надпись -->
+    <section class="welcome-section">
+        <div class="container">
+            <div class="welcome-content">
+                <h2>Дорогие друзья и родные!</h2>
+                <p>Мы рады пригласить вас на нашу свадьбу, которая состоится в прекрасном месте, где мы будем праздновать начало нашего совместного пути.</p>
+                <p>Этот день будет особенным не только для нас, но и для всех, кто разделит с нами эту радость.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Адрес и код -->
+    <section class="details-section">
+        <div class="container">
+            <div class="details-grid">
+                <div class="detail-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Место проведения</h3>
+                    <p>Ресторан "Времена года"</p>
+                    <p>ул. Парковая, 15</p>
+                    <p>Москва</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Время</h3>
+                    <p>Сбор гостей: 17:00</p>
+                    <p>Начало торжества: 18:00</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-qrcode"></i>
+                    <h3>Дресс-код</h3>
+                    <p>Вечерний наряд</p>
+                    <p>Цветовая гамма: пастельные тона</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подсказки и рекомендации -->
+    <section class="tips-section">
+        <div class="container">
+            <h2>Полезная информация</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-gift"></i>
+                    <h3>Подарки</h3>
+                    <p>Ваше присутствие - лучший подарок для нас! Если хотите сделать подарок, мы будем рады конверту с пожеланиями.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-baby"></i>
+                    <h3>Дети</h3>
+                    <p>К сожалению, мы не сможем принять детей на нашем торжестве. Заранее благодарим за понимание.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-car"></i>
+                    <h3>Как добраться</h3>
+                    <p>Бесплатная парковка на территории ресторана. Также можно добраться на метро до станции "Парковая".</p>
+                    <a href="https://maps.google.com" target="_blank" class="map-link">
+                        <i class="fas fa-map"></i> Открыть карту
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Регистрация -->
+    <section class="registration-section">
+        <div class="container">
+            <h2>Подтвердите свое присутствие</h2>
+            <form class="registration-form" id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">ФИО</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Количество гостей</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Выберите количество</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Пожелания (необязательно)</label>
+                    <textarea id="message" name="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Подтвердить присутствие</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Свадьба Анны и Михаила</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

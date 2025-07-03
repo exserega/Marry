@@ -1,0 +1,396 @@
+/* Основные переменные цветов */
+:root {
+    --color-primary: #657362;
+    --color-secondary: #9aa795;
+    --color-accent: #c1c1c1;
+    --color-accent-2: #bd908d;
+    --color-white: #ffffff;
+    --color-light: #f8f9fa;
+    --color-dark: #2c3e50;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+}
+
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--color-dark);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Шапка сайта с развивающейся тканью */
+.header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+}
+
+.fabric-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.fabric-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--color-accent-2), var(--color-accent));
+    opacity: 0.8;
+    transform-origin: center;
+}
+
+.fabric-layer-1 {
+    animation: fabricWave 8s ease-in-out infinite;
+    background: linear-gradient(45deg, var(--color-accent-2), var(--color-secondary));
+}
+
+.fabric-layer-2 {
+    animation: fabricWave 8s ease-in-out infinite 2s;
+    background: linear-gradient(45deg, var(--color-secondary), var(--color-primary));
+}
+
+.fabric-layer-3 {
+    animation: fabricWave 8s ease-in-out infinite 4s;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+}
+
+@keyframes fabricWave {
+    0%, 100% {
+        transform: translateX(-10px) translateY(-5px) rotate(1deg) scale(1.02);
+    }
+    25% {
+        transform: translateX(5px) translateY(-10px) rotate(-0.5deg) scale(1.01);
+    }
+    50% {
+        transform: translateX(-5px) translateY(5px) rotate(0.5deg) scale(1.03);
+    }
+    75% {
+        transform: translateX(10px) translateY(-5px) rotate(-1deg) scale(1.01);
+    }
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--color-white);
+    padding: 20px;
+}
+
+.couple-names {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.wedding-date {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 300;
+    animation: fadeInUp 1.5s ease-out 0.3s both;
+}
+
+.wedding-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    animation: fadeInUp 1.5s ease-out 0.6s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Приветственная секция */
+.welcome-section {
+    padding: 80px 0;
+    background: var(--color-light);
+}
+
+.welcome-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welcome-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+}
+
+.welcome-content p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: var(--color-dark);
+    line-height: 1.8;
+}
+
+/* Секция с деталями */
+.details-section {
+    padding: 80px 0;
+    background: var(--color-white);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.detail-card {
+    background: var(--color-secondary);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.detail-card i {
+    font-size: 3rem;
+    color: var(--color-white);
+    margin-bottom: 20px;
+}
+
+.detail-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--color-white);
+    margin-bottom: 15px;
+}
+
+.detail-card p {
+    color: var(--color-white);
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+/* Секция с подсказками */
+.tips-section {
+    padding: 80px 0;
+    background: var(--color-accent);
+}
+
+.tips-section h2 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 50px;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.tip-card {
+    background: var(--color-white);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+}
+
+.tip-card i {
+    font-size: 2.5rem;
+    color: var(--color-accent-2);
+    margin-bottom: 20px;
+}
+
+.tip-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.tip-card p {
+    color: var(--color-dark);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-accent-2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.map-link:hover {
+    color: var(--color-primary);
+}
+
+/* Секция регистрации */
+.registration-section {
+    padding: 80px 0;
+    background: var(--color-accent-2);
+}
+
+.registration-section h2 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--color-white);
+    margin-bottom: 50px;
+}
+
+.registration-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--color-white);
+    padding: 50px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--color-secondary);
+}
+
+/* Футер */
+.footer {
+    background: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .couple-names {
+        font-size: 2.5rem;
+    }
+    
+    .wedding-date {
+        font-size: 1.2rem;
+    }
+    
+    .welcome-content h2,
+    .tips-section h2,
+    .registration-section h2 {
+        font-size: 2rem;
+    }
+    
+    .details-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .registration-form {
+        padding: 30px 20px;
+    }
+    
+    .detail-card,
+    .tip-card {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .couple-names {
+        font-size: 2rem;
+    }
+    
+    .header {
+        height: 80vh;
+    }
+    
+    .welcome-section,
+    .details-section,
+    .tips-section,
+    .registration-section {
+        padding: 60px 0;
+    }
+} 
