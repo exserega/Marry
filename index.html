@@ -148,7 +148,7 @@
     }
 
     .header-title {
-      font-family: 'Great Vibes', cursive !important;
+      font-family: 'Montserrat', serif !important;
       font-size: 3.2rem !important;
       color: var(--rose);
       margin-bottom: 1rem;
@@ -173,6 +173,57 @@
       body .header-title {
         font-size: 1.3rem !important;
         margin-bottom: 4.3rem !important;
+      }
+    }
+
+
+
+    /* === HEADER CALENDAR IMAGE === */
+    .header-calendar-image {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .calendar-img {
+      max-width: 750px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+      transition: all 0.3s ease;
+    }
+
+    .calendar-img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 6px 25px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Адаптивные стили для изображения календаря */
+    @media (max-width: 768px) {
+      .calendar-img {
+        max-width: 570px;
+      }
+      .header-calendar-image {
+        top: 3px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-calendar-image .calendar-img {
+        max-width: 380px !important;
+        width: 80% !important;
+        height: auto !important;
+      }
+      .header-calendar-image {
+        top: -23px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transform: none;
       }
     }
 
@@ -491,6 +542,53 @@
       transform: translateX(-50%);
       opacity: 0.8;
       z-index: 0;
+    }
+    
+    /* Точки на временной линии */
+    .timing-minimal-item::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background: var(--green-dark);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(101, 115, 98, 0.3);
+      border: 3px solid var(--cream);
+      opacity: 0;
+      animation: fadeInDot 0.6s ease-out forwards;
+    }
+    
+    @keyframes fadeInDot {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+    
+    /* Задержка анимации для каждой точки */
+    .timing-minimal-item:nth-child(2)::after {
+      animation-delay: 0.2s;
+    }
+    .timing-minimal-item:nth-child(3)::after {
+      animation-delay: 0.4s;
+    }
+    .timing-minimal-item:nth-child(4)::after {
+      animation-delay: 0.6s;
+    }
+    .timing-minimal-item:nth-child(5)::after {
+      animation-delay: 0.8s;
     }
     .timing-minimal-item {
       margin-bottom: 2rem;
@@ -856,6 +954,46 @@
       background: var(--white);
       color: var(--rose);
       border-color: var(--rose);
+    }
+
+    /* Стили для кнопки карты */
+    .map-link {
+      display: inline-block;
+      background: rgba(254, 252, 249, 0.1);
+      color: white !important;
+      border: 2px solid white;
+      padding: 0.45rem 1.1rem;
+      border-radius: 18px;
+      font-weight: 400;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', serif !important;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      box-shadow: var(--shadow-light);
+      transition: all var(--transition-fast) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-transform: uppercase !important;
+      animation: pulse 2s infinite;
+    }
+
+    .map-link:hover {
+      background: rgba(254, 252, 249, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Адаптивные стили для кнопки карты */
+    @media (max-width: 768px) {
+      .map-link {
+        font-size: 1rem;
+        padding: 0.4rem 1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .map-link {
+        font-size: 0.9rem;
+        padding: 0.35rem 0.9rem;
+      }
     }
 
 
@@ -1748,7 +1886,7 @@
 
     @media (max-width: 600px) {
       body .header-title {
-        font-size: 2.2rem !important;
+        font-size: 1.8rem !important;
         font-weight: 460 !important;
       }
       body .header-date {
@@ -2259,8 +2397,10 @@
 <header>
   <div class="header-bg" id="headerBg"></div>
   <div class="header-overlay"></div>
-  <div class="header-content" id="headerContent">
-    <h1 class="header-title">20.09.2025</h1>
+    <div class="header-content" id="headerContent">
+    <div class="header-calendar-image">
+      <img src="date.png" alt="Календарь свадьбы" class="calendar-img">
+    </div>
     <div class="header-main">
       <h2 class="header-names">
         Назерке<br>
@@ -2470,7 +2610,7 @@
   <div class="venue-photo-block">
     <img src="Screenshot_7.jpg" alt="Карта Tabi Village в 2ГИС">
     <div class="venue-map-link">
-      <a href="https://2gis.kz/almaty/firm/70000001081868450" target="_blank" rel="noopener" class="hashtag" style="color: var(--rose); font-family: 'Montserrat', serif; font-size: 1.1rem; text-decoration: none;">Открыть на карте 2ГИС</a>
+      <a href="https://2gis.kz/almaty/firm/70000001081868450" target="_blank" rel="noopener" class="map-link">Открыть на карте 2ГИС</a>
     </div>
   </div>
 </section>
