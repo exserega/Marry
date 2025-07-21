@@ -291,7 +291,7 @@
     /* === SCROLL HINT === */
     .scroll-hint {
       position: absolute;
-      bottom: 30px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -335,7 +335,7 @@
     .scroll-text {
       font-family: 'Montserrat', serif;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 300;
       color: var(--green-dark);
       letter-spacing: 0.5px;
       text-transform: uppercase;
@@ -350,12 +350,35 @@
     }
 
     /* Адаптивные стили для подсказки */
+    /* Десктопы - прям внизу экрана */
+    @media (min-width: 1025px) {
+      .scroll-hint {
+        bottom: 40px;
+      }
+      .scroll-text {
+        font-size: 0.9rem;
+        font-weight: 300;
+      }
+    }
+
+    /* Планшеты */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .scroll-hint {
+        bottom: 30px;
+      }
+      .scroll-text {
+        font-size: 0.85rem;
+        font-weight: 300;
+      }
+    }
+
     @media (max-width: 768px) {
       .scroll-hint {
         bottom: 20px;
       }
       .scroll-text {
         font-size: 0.8rem;
+        font-weight: 300;
       }
       .scroll-arrow svg {
         width: 20px;
@@ -369,6 +392,7 @@
       }
       .scroll-text {
         font-size: 0.75rem;
+        font-weight: 300;
       }
       .scroll-arrow svg {
         width: 18px;
