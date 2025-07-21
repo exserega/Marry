@@ -2454,7 +2454,7 @@
 </div>
 <!-- Видео-интро -->
 <div id="intro-video-overlay" style="display:none;">
-  <video id="intro-video" src="NAZERKE&SERGEY1 vert.mov.mp4" playsinline preload="auto" style="width:100vw;height:100vh;object-fit:cover;display:block;" muted></video>
+  <video id="intro-video" playsinline preload="auto" style="width:100vw;height:100vh;object-fit:cover;display:block;" muted></video>
 </div>
 
 <!-- Фон для видео-интро -->
@@ -2908,10 +2908,26 @@
   const videoBgOverlay = document.getElementById('video-bg-overlay');
   const introMusic = document.getElementById('intro-music');
 
+  // Функция для выбора правильного видео в зависимости от устройства
+  function setVideoSource() {
+    const introVideo = document.getElementById('intro-video');
+    const isMobile = window.innerWidth <= 600;
+    
+    if (isMobile) {
+      // Мобильные устройства - вертикальное видео 9:16
+      introVideo.src = "NAZERKE&SERGEY1 vert.mov.mp4";
+    } else {
+      // Планшеты и десктопы - горизонтальное видео 16:9
+      introVideo.src = "Nazerke&Sergey 2.mp4";
+    }
+  }
+
   // Флаг для предотвращения повторных кликов
   let envelopeClicked = false;
 
   function showVideoIntro() {
+    // Установить правильное видео перед показом
+    setVideoSource();
     // Скрыть стартовый экран
     startOverlay.style.opacity = '0';
     setTimeout(() => { startOverlay.style.display = 'none'; }, 700);
