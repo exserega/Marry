@@ -2454,7 +2454,7 @@
 </div>
 <!-- Видео-интро -->
 <div id="intro-video-overlay" style="display:none;">
-  <video id="intro-video" playsinline preload="auto" style="width:100vw;height:100vh;object-fit:cover;display:block;" muted></video>
+  <video id="intro-video" playsinline preload="metadata" style="width:100vw;height:100vh;object-fit:cover;display:block;" muted></video>
 </div>
 
 <!-- Фон для видео-интро -->
@@ -2913,12 +2913,21 @@
     const introVideo = document.getElementById('intro-video');
     const isMobile = window.innerWidth <= 600;
     
-    if (isMobile) {
-      // Мобильные устройства - вертикальное видео 9:16
-      introVideo.src = "NAZERKE&SERGEY1 vert.mov.mp4";
-    } else {
-      // Планшеты и десктопы - горизонтальное видео 16:9
-      introVideo.src = "Nazerke&Sergey 2.mp4";
+    const newSrc = isMobile ? "NAZERKE&SERGEY1 vert.mov.mp4" : "Nazerke&Sergey 2.mp4";
+    
+    // Устанавливаем источник только если он изменился
+    if (introVideo.src !== window.location.origin + '/' + newSrc && 
+        !introVideo.src.endsWith(newSrc)) {
+      if (isMobile) {
+        // Мобильные устройства - вертикальное видео 9:16
+        introVideo.src = "NAZERKE&SERGEY1 vert.mov.mp4";
+      } else {
+        // Планшеты и десктопы - горизонтальное видео 16:9
+        introVideo.src = "Nazerke&Sergey 2.mp4";
+      }
+      
+      // Принудительно начать загрузку
+      introVideo.load();
     }
   }
 
@@ -3043,6 +3052,9 @@
 
     // Инициализация при загрузке страницы
   window.addEventListener('DOMContentLoaded', function() {
+    // Сразу установить правильное видео для предзагрузки во время заставки
+    setVideoSource();
+    
     // Инициализация анимации конверта
     initEnvelopeAnimation();
     
@@ -3061,6 +3073,15 @@
     document.addEventListener('click', tryStartMusic, { once: true });
     document.addEventListener('touchstart', tryStartMusic, { once: true });
     document.addEventListener('keydown', tryStartMusic, { once: true });
+  });
+
+  // Обработчик изменения размера окна для обновления видео во время заставки
+  window.addEventListener('resize', function() {
+    // Обновляем источник видео при изменении размера окна (поворот устройства)
+    // но только если конверт еще не был нажат
+    if (!envelopeClicked) {
+      setVideoSource();
+    }
   });
 </script>
 
