@@ -4,15 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Приглашение на свадьбу</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Preconnect для ускорения загрузки шрифтов -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Google Fonts с display=swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
   <style>
     :root {
+      /* Цветовая палитра */
       --green-dark: #657362;
       --green-light: #9aa795;
       --gray: #c1c1c1;
       --rose: #bd908d;
-      --white: #f8f8f8;
+      --white: #fefcf9;
       --cream: #fefcf9;
+      
+      /* Размеры и отступы */
+      --container-max-width: 1200px;
+      --section-padding: 6rem 2rem;
+      --border-radius: 20px;
+      --border-radius-small: 15px;
+      
+      /* Breakpoints */
+      --mobile: 600px;
+      --tablet: 768px;
+      --desktop: 1024px;
+      
+      /* Тени */
+      --shadow-light: 0 2px 8px rgba(101, 115, 98, 0.06);
+      --shadow-medium: 0 8px 25px rgba(189, 144, 141, 0.3);
+      --shadow-heavy: 0 15px 40px rgba(101, 115, 98, 0.15);
+      
+      /* Переходы */
+      --transition-fast: 0.3s ease;
+      --transition-medium: 0.5s ease;
+      --transition-slow: 1s ease;
     }
 
     * {
@@ -21,13 +50,46 @@
       box-sizing: border-box;
     }
 
+    div {
+      box-sizing: border-box;
+    }
+
+    html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+
+    /* === TYPOGRAPHY === */
+    /* Заголовки и крупные подписи — Great Vibes */
+    h1, h2, h3, .header-names, .timing-minimal-title, .photo-quote, .photo-subtitle, .section-title {
+      font-family: 'Great Vibes', cursive !important;
+      font-size: 2.2em !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      letter-spacing: 0.01em !important;
+      text-transform: none !important;
+    }
+
+    /* Весь остальной текст — Montserrat */
+    body, p, form, input, select, textarea, .btn, .countdown-block, .countdown-list, .countdown-item, .countdown-number, .countdown-label, .timing-minimal, .timing-content, .timing-minimal-desc, .timing-minimal-time {
+      font-family: 'Montserrat', serif !important;
+    }
+
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', serif;
       line-height: 1.6;
       color: var(--green-dark);
       background: var(--cream);
       overflow-x: hidden;
+      overflow-y: visible;
       font-style: normal;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
     }
 
     /* === HEADER SECTION === */
@@ -86,40 +148,167 @@
     }
 
     .header-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-family: 'Montserrat', serif !important;
+      font-size: 3.2rem !important;
       color: var(--rose);
       margin-bottom: 1rem;
       text-shadow: 0 2px 20px rgba(189, 144, 141, 0.3);
-      font-weight: 300;
+      font-weight: 460 !important;
+      letter-spacing: 3px;
+      font-style: italic;
+      text-transform: uppercase !important;
     }
 
-    .header-names {
+    @media (max-width: 600px) {
+      .header-title {
+        font-size: clamp(3.89rem, 1.28vw, 4.96rem) !important;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .header-title {
+        font-size: 1rem !important;
+      }
+    }
+    @media (min-width: 1025px) {
+      body .header-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 4.3rem !important;
+      }
+    }
+
+
+
+    /* === HEADER CALENDAR IMAGE === */
+    .header-calendar-image {
+      position: absolute;
+      top: -150px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .calendar-img {
+      max-width: 1050px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+      transition: all 0.3s ease;
+      transform: scale(0.8);
+        transform-origin: center center;
+      }
+    
+    .calendar-img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 6px 25px rgba(0, 0, 0, 0.4));
+    }
+
+    @media (max-width: 1024px) {
+      .header-calendar-image .calendar-img {
+        max-width: 880px !important;
+        width: 100% !important;
+        height: auto !important;
+      transform: scale(1.2);
+        transform-origin: center center;
+      }
+    }
+
+     @media (max-width: 900px) {
+      .header-calendar-image .calendar-img {
+        max-width: 880px !important;
+        width: 100% !important;
+        height: auto !important;
+      transform: scale(1.6);
+        transform-origin: center center;
+      }
+
+      .header-calendar-image {
+        top: -150px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transform: none;
+      }
+    }
+
+     .header-names {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(3.5rem, 8vw, 5rem);
+      font-size: clamp(10rem, 10vw, 8rem) !important;
       color: var(--green-dark);
       margin-bottom: 1.5rem;
       font-weight: 300;
       letter-spacing: 2px;
       text-shadow: 0 4px 30px rgba(101, 115, 98, 0.2);
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .header-calendar-image .calendar-img {
+        max-width: 380px !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: scale(0.8);
+        transform-origin: center center;
+      }
+      .header-calendar-image {
+        top: -23px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transform: none;
+      }
+    }
+
+    .header-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(4rem, 10vw, 8rem) !important;
+      color: var(--green-dark);
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 30px rgba(101, 115, 98, 0.2);
+      text-align: center;
+    }
+
+    /* Опускаем текст на 10px только на десктопе */
+    @media (min-width: 1025px) {
+      .header-names {
+        transform: translateY(30px);
+      }
     }
 
     .header-date {
+      font-family: 'Montserrat', serif !important;
       font-size: clamp(1.2rem, 2.5vw, 1.5rem);
       font-weight: 300;
       color: var(--green-light);
       letter-spacing: 3px;
-      font-style: italic;
+      font-style: normal;
+      margin-bottom: 0;
+    }
+
+    /* === MAIN === */
+    main {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow: visible;
+      position: relative;
     }
 
     /* === SECTIONS === */
     section {
-      padding: 6rem 2rem;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: var(--section-padding);
       text-align: center;
       position: relative;
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease-out;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     section.visible {
@@ -137,19 +326,49 @@
 
     h2 {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-size: clamp(6rem, 12vw, 9rem);
       color: var(--rose);
       margin-bottom: 2rem;
       text-shadow: 0 2px 20px rgba(189, 144, 141, 0.2);
       font-weight: 300;
+      animation: slideInDown 0.8s ease-out;
+    }
+
+    /* Увеличенный размер только для заголовка #invitation h2 */
+    #invitation h2 {
+      font-size: clamp(2.88rem, 5.76vw, 4.32rem) !important;
+    }
+    
+    /* Явно задаем белый фон для секции приветствия */
+    #invitation {
+      background: var(--white) !important;
+    }
+
+    @keyframes slideInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     h3 {
-      font-size: 1.4rem;
+      font-size: 3.4rem;
       font-weight: 500;
       color: var(--green-dark);
       margin: 2rem 0 1rem;
       font-style: italic;
+    }
+    /* Сохраняем прежний размер заголовков в блоке "Подсказки" */
+    #tips h3 {
+      font-family: 'Montserrat', serif !important;
+      font-style: italic !important;
+      font-size: 1.15rem !important;
+      text-transform: uppercase !important;
+      line-height: 1.1 !important;
     }
 
     p {
@@ -162,39 +381,78 @@
       margin-right: auto;
       font-style: normal;
       font-weight: 300;
+      animation: fadeIn 1s ease-out 0.3s both;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
 
     /* === PHOTO SECTIONS ANIMATED === */
     .photo-section {
-      height: 85vh;
+      aspect-ratio: 16/9;
       min-height: 400px;
-      max-height: 600px;
+      max-height: 85vh;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transform: translateX(0);
-      transition: opacity 0.8s cubic-bezier(.6,.2,.2,1), transform 1.1s cubic-bezier(.6,.2,.2,1);
-      margin-left: 0 !important;
-      padding-left: 0 !important;
+      transform: translateY(50px);
+      transition: all var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
     }
     .photo-section.visible {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
+    }
+    .photo-section.from-left,
+    .photo-section.from-right {
+      opacity: 0;
+      transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .photo-section.from-left {
-      /* transform убран, чтобы не было отступа слева */
-    }
-    .photo-section.from-left.visible {
-      transform: translateX(0);
+      transform: translateX(-80px);
     }
     .photo-section.from-right {
-      /* transform убран, чтобы не было отступа справа */
+      transform: translateX(80px);
+    }
+    .photo-section.from-left.visible,
+    .photo-section.from-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    /* Specific styling for pexels-visoesdomundo-2808658.jpg photo section */
+    .photo-section#photo3 .photo-bg img {
+      object-position: center 39%;
+    }
+    
+    /* Specific styling for pexels-cottonbro-4908144.jpg photo section - show heads properly */
+    .photo-section#photo4 .photo-bg img {
+      object-position: center 30%;
+    }
+    
+    /* Specific styling for pexels-cottonbro-4908138.jpg photo section - lower display area */
+    .photo-section#photo1 .photo-bg img {
+      object-fit: cover !important;
+      object-position: center 0% !important;
+    }
+    .photo-section.from-right {
+      transform: translateX(80px);
+      opacity: 0;
+      transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .photo-section.from-right.visible {
-      transform: translateX(0);
+      transform: translateX(0) translateY(0);
     }
     .photo-bg {
       position: absolute;
@@ -202,10 +460,54 @@
       left: 0;
       width: 100%;
       height: 100%;
+      filter: brightness(0.9);
+      transition: all var(--transition-medium) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      background-color: #eaeae8;
       background-size: cover;
-      background-position: top center;
-      background-attachment: fixed;
-      filter: brightness(0.8);
+      background-position: center;
+    }
+
+    .photo-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 1 !important;
+      transition: none !important;
+    }
+
+    .photo-bg img.loaded {
+      opacity: 1;
+    }
+
+    .photo-section:hover .photo-bg {
+      filter: brightness(1);
+    }
+
+    .photo-section:hover .photo-bg img {
+      transform: none;
+    }
+
+    /* Fallback для браузеров без поддержки aspect-ratio */
+    @supports not (aspect-ratio: 16/9) {
+      .photo-section {
+        height: 85vh;
+      }
+      @media (max-width: 900px) {
+        .photo-section {
+          height: 450px;
+        }
+      }
+      @media (max-width: 768px) {
+        .photo-section {
+          height: 40vh;
+        }
+      }
+      @media (max-width: 600px) {
+        .photo-section {
+          height: 250px;
+        }
+      }
     }
     .photo-overlay {
       position: absolute;
@@ -213,111 +515,247 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, rgba(189, 144, 141, 0.3) 0%, rgba(154, 167, 149, 0.3) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all var(--transition-medium) cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+
+    .photo-section:hover .photo-overlay {
+      /* Убрана прозрачность */
+    }
+
     .photo-content {
       text-align: center;
       color: white;
       z-index: 2;
       position: relative;
-    }
-    .photo-quote {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    .photo-subtitle {
-      font-size: 1.1rem;
-      font-style: italic;
-      opacity: 0.9;
-      text-shadow: 0 1px 5px rgba(0,0,0,0.5);
-    }
-    @media (max-width: 900px) {
-      .photo-section {
-        height: 450px;
-        min-height: 350px;
-      }
-    }
-    @media (max-width: 600px) {
-      .photo-section, .photo-section.from-left, .photo-section.from-right {
-        min-height: unset;
-        height: auto;
-        max-height: unset;
-        aspect-ratio: 16/9;
-        width: 100%;
-      }
-      #photo2 .photo-bg {
-        background-position: center -30px !important;
-      }
-      #photo3 .photo-bg {
-        background-position: center -165px !important;
-      }
-      #photo4 .photo-bg {
-        background-position: center -120px !important;
-      }
-      .photo-bg {
-        background-attachment: scroll;
-        background-position: top center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100%;
-      }
-      .photo-quote { font-size: 1.3rem; }
-      .photo-subtitle { font-size: 1rem; }
+      transition: all var(--transition-medium) cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    /* === MINIMAL TIMING === */
+    .photo-section:hover .photo-content {
+      transform: none;
+    }
+    .photo-quote {
+      font-family: 'Great Vibes', cursive !important;
+      font-size: 2.2rem !important;
+      font-style: normal !important;
+      opacity: 1 !important;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    /* Увеличенный размер для планшетов и десктопа */
+    @media (min-width: 601px) {
+      .photo-quote {
+        font-size: 3.2rem !important;
+      }
+    }
+
+    .photo-subtitle {
+      font-family: 'Montserrat', serif !important;
+      font-size: 0.9rem !important;
+      font-style: italic !important;
+      opacity: 1 !important;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.8), 0 2px 3px rgba(0,0,0,0.9);
+    }
+
+   
+
+    /* === TIMELINE CLASSIC === */
     .timing-minimal {
-      max-width: 400px;
+      max-width: 800px;
       margin: 0 auto;
-      text-align: center;
       padding: 0;
-      background: none;
-      box-shadow: none;
+      position: relative;
+      font-size: 0.9em;
     }
     .timing-minimal-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      margin-bottom: 2.5rem;
-      color: var(--green-dark);
-      text-transform: uppercase;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.88rem, 5.76vw, 4.32rem) !important;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      margin-bottom: 4rem;
+      color: var(--rose) !important;
+      text-transform: none !important;
+      text-align: center;
+    }
+    .timing-minimal::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 120px;
+      bottom: 0;
+      width: 2px;
+      background: var(--green-light);
+      transform: translateX(-50%);
+      opacity: 0.8;
+      z-index: 0;
+    }
+    
+    /* Точки на временной линии */
+    .timing-minimal-item::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background: var(--green-dark);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(101, 115, 98, 0.3);
+      border: 3px solid var(--cream);
+      opacity: 0;
+      animation: fadeInDot 0.6s ease-out forwards;
+    }
+    
+    @keyframes fadeInDot {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+    
+    /* Задержка анимации для каждой точки */
+    .timing-minimal-item:nth-child(2)::after {
+      animation-delay: 0.2s;
+    }
+    .timing-minimal-item:nth-child(3)::after {
+      animation-delay: 0.4s;
+    }
+    .timing-minimal-item:nth-child(4)::after {
+      animation-delay: 0.6s;
+    }
+    .timing-minimal-item:nth-child(5)::after {
+      animation-delay: 0.8s;
     }
     .timing-minimal-item {
-      margin-bottom: 2.2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      min-height: 108px;
+      height: 108px;
+    }
+    .timing-minimal-item:nth-child(odd) {
+      height: 120px;
+    }
+    .timing-minimal-item:nth-child(odd) .timing-content {
+      text-align: left;
+      position: absolute;
+      left: calc(50% + 1.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      align-items: flex-start;
+    }
+    .timing-minimal-item:nth-child(odd) .timing-icon {
+      position: absolute;
+      right: calc(50% + 1.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .timing-minimal-item:nth-child(even) {
+      height: 120px;
+    }
+    .timing-minimal-item:nth-child(even) .timing-content {
+      text-align: right;
+      position: absolute;
+      right: calc(50% + 1.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      align-items: flex-end;
+    }
+    .timing-minimal-item:nth-child(even) .timing-icon {
+      position: absolute;
+      left: calc(50% + 1.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .timing-icon {
+      width: 6.48rem !important;
+      height: 6.48rem !important;
+      min-width: 6.48rem !important;
+      min-height: 6.48rem !important;
+      max-width: 6.48rem !important;
+      max-height: 6.48rem !important;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(101, 115, 98, 0.3));
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .timing-icon:hover {
+      transform: scale(1.1);
+    }
+    .timing-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 2;
     }
     .timing-minimal-time {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.25rem;
+      font-weight: 400;
       color: var(--green-dark);
-      margin-bottom: 0.3rem;
-    }
-    .timing-minimal-line {
-      display: inline-block;
-      width: 32px;
-      height: 2px;
-      background: var(--green-dark);
-      margin: 0 10px;
-      border-radius: 1px;
-      opacity: 0.5;
+      margin-bottom: 0.1rem;
+      line-height: 1.2;
+      font-style: italic;
+      white-space: nowrap;
+      text-align: center !important;
+      align-self: center !important;
     }
     .timing-minimal-desc {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.05rem;
+      font-family: 'Montserrat', serif;
+      font-size: 0.9rem;
       font-weight: 400;
       color: var(--green-dark);
       margin: 0;
-      font-style: normal;
+      opacity: 1;
+      line-height: 1.0;
+      text-align: center !important;
+      text-transform: uppercase !important;
+    }
+    @media (max-width: 900px) {
+      .timing-minimal {
+        max-width: 98vw;
+      }
+      .timing-icon {
+        width: 6.48rem;
+        height: 6.48rem;
+      }
+      .timing-minimal-item {
+        min-height: 80px;
+        height: 80px;
+      }
+      .timing-minimal-title {
+        font-size: 10rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .timing-minimal-title {
+        font-size: 6rem;
+        margin-bottom: 2rem;
+      }
+      .timing-icon {
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+      .timing-minimal-item {
+        min-height: 60px;
+        height: 60px;
+      }
+      .timing-minimal {
+        max-width: 100vw;
+      }
     }
 
     /* === COLOR PALETTE === */
@@ -333,11 +771,30 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      border: 4px solid white;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       cursor: pointer;
-      transition: all 0.4s ease;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
+      animation: bounceIn 0.6s ease-out;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .color-circle:hover {
@@ -365,10 +822,11 @@
     .color-white { background-color: #ffffff; }
     .color-black { background-color: #000000; }
     .color-gray { background-color: #e6e6e6; }
-    .color-circle.color-beige1 { background: #e5d8cb; }
-    .color-circle.color-beige2 { background: #f0e7db; }
-    .color-circle.color-beige3 { background: #f5ede6; }
-    .color-circle.color-beige4 { background: #f8f5f2; }
+    .color-circle.color-dress1 { background: #81876f; }
+    .color-circle.color-dress2 { background: #cad3b4; }
+    .color-circle.color-dress3 { background: #c6c6c6; }
+    .color-circle.color-dress4 { background: #e5c4bb; }
+    .color-circle.color-dress5 { background: #bd908d; }
 
     /* === FORM === */
     form {
@@ -376,10 +834,22 @@
       margin: 2rem auto;
       background: white;
       padding: 2.5rem;
-      border-radius: 25px;
-      box-shadow: 0 15px 40px rgba(101, 115, 98, 0.15);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-heavy);
       position: relative;
       overflow: hidden;
+      animation: scaleIn 0.8s ease-out;
+    }
+
+    @keyframes scaleIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     form::before {
@@ -399,10 +869,10 @@
       margin: 1.2rem 0;
       padding: 1.2rem;
       border: 2px solid var(--gray);
-      border-radius: 15px;
+      border-radius: var(--border-radius-small);
       font-family: inherit;
       font-size: 1rem;
-      transition: all 0.3s ease;
+      transition: all var(--transition-fast) ease;
       background: var(--cream);
       font-style: normal;
     }
@@ -424,8 +894,8 @@
       text-decoration: none;
       border-radius: 30px;
       font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 25px rgba(189, 144, 141, 0.3);
+      transition: all var(--transition-fast) ease;
+      box-shadow: var(--shadow-medium);
       border: none;
       cursor: pointer;
       font-size: 1rem;
@@ -453,16 +923,22 @@
       left: 100%;
     }
 
+    .btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(189, 144, 141, 0.3);
+    }
+
     /* === MAP === */
     iframe {
       width: 100%;
       max-width: 700px;
       height: 350px;
       border: none;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       margin: 2rem auto;
       display: block;
-      box-shadow: 0 15px 40px rgba(101, 115, 98, 0.15);
+      box-shadow: var(--shadow-heavy);
+      animation: slideInUp 1s ease-out;
     }
 
     /* === DECORATIVE ELEMENTS === */
@@ -480,60 +956,36 @@
       opacity: 0.6;
     }
 
-    /* === RESPONSIVE === */
-    @media (max-width: 768px) {
-      section {
-        padding: 4rem 1rem;
-      }
 
-      .timing-minimal {
-        padding: 0;
-      }
-
-      .timing-minimal-item {
-        margin-bottom: 1.5rem;
-      }
-
-      .timing-minimal-time {
-        font-size: 1.1rem;
-      }
-
-      .timing-minimal-desc {
-        font-size: 0.9rem;
-      }
-
-      .color-palette {
-        gap: 1rem;
-      }
-
-      .color-circle {
-        width: 50px;
-        height: 50px;
-      }
-
-      .photo-section {
-        height: 40vh;
-      }
-
-      .photo-bg {
-        background-attachment: scroll;
-      }
-    }
 
     .hashtag {
       display: inline-block;
       background: var(--cream);
-      color: var(--rose);
+      color: var(--rose) !important;
       border: 1.5px solid var(--rose);
       padding: 0.45rem 1.1rem;
       border-radius: 18px;
       font-weight: 400;
       margin-top: 1.1rem;
       font-size: 1rem;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', serif !important;
       letter-spacing: 0.03em;
-      box-shadow: 0 2px 8px rgba(189, 144, 141, 0.06);
-      transition: background 0.3s, color 0.3s, border 0.3s;
+      box-shadow: var(--shadow-light);
+      transition: all var(--transition-fast) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-transform: uppercase !important;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(189, 144, 141, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(189, 144, 141, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(189, 144, 141, 0);
+      }
     }
 
     .hashtag.green {
@@ -552,6 +1004,48 @@
       border-color: var(--rose);
     }
 
+    /* Стили для кнопки карты */
+    .map-link {
+      display: inline-block;
+      background: rgba(254, 252, 249, 0.1);
+      color: white !important;
+      border: 2px solid white;
+      padding: 0.45rem 1.1rem;
+      border-radius: 18px;
+      font-weight: 400;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', serif !important;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      box-shadow: var(--shadow-light);
+      transition: all var(--transition-fast) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-transform: uppercase !important;
+      animation: pulse 2s infinite;
+    }
+
+    .map-link:hover {
+      background: rgba(254, 252, 249, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Адаптивные стили для кнопки карты */
+    @media (max-width: 768px) {
+      .map-link {
+        font-size: 1rem;
+        padding: 0.4rem 1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .map-link {
+        font-size: 0.9rem;
+        padding: 0.35rem 0.9rem;
+      }
+    }
+
+
+
     .tip-badge {
       display: inline-block;
       background: var(--cream);
@@ -561,13 +1055,26 @@
       border-radius: 16px;
       font-weight: 400;
       font-size: 1rem;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', serif !important;
       letter-spacing: 0.02em;
       margin-right: 0.5rem;
       margin-bottom: 0.2rem;
       vertical-align: middle;
-      box-shadow: 0 2px 8px rgba(189, 144, 141, 0.06);
-      transition: background 0.3s, color 0.3s, border 0.3s;
+      box-shadow: var(--shadow-light);
+      transition: all var(--transition-fast) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-transform: uppercase !important;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     .tip-badge.green {
       color: var(--green-dark);
@@ -591,29 +1098,43 @@
     }
 
     /* === TIPS ICONS === */
-    .tip-icon {
-      width: 2.28em;
-      height: 2.28em;
-      min-width: 2.28em;
-      min-height: 2.28em;
-      max-width: 2.28em;
-      max-height: 2.28em;
+    #tips .tip-icon {
+      width: 2.5em;
+      height: 2.5em;
+      min-width: 2.5em;
+      min-height: 2.5em;
+      max-width: 2.5em;
+      max-height: 2.5em;
       object-fit: contain;
-      vertical-align: -0.45em;
+      vertical-align: middle;
       margin-right: 0.4em;
       margin-bottom: 0;
       display: inline-block;
     }
     .tip-icon.surprise {
-      width: 2.166em;
-      height: 2.166em;
-      vertical-align: -0.45em;
+      width: 8em;
+      height: 8em;
+      min-width: 8em;
+      min-height: 8em;
+      max-width: 8em;
+      max-height: 8em;
+      object-fit: contain;
+      vertical-align: middle;
       margin-right: 0.4em;
     }
     .tip-icon.envelope { color: var(--green-dark); }
     .tip-icon.question { color: var(--gray); }
     .tip-icon.family { color: var(--green-light); }
-    .tip-icon.camera { color: var(--green-light); }
+    .tip-icon.camera {
+      width: 5em;
+      height: 5em;
+      min-width: 5em;
+      min-height: 5em;
+      max-width: 5em;
+      max-height: 5em;
+      margin-right: -0.6em; /* подтягиваем текст ближе */
+      vertical-align: -0.15em; /* выравниваем по baseline */
+    }
 
     /* === COUNTDOWN BLOCK === */
     .countdown-block {
@@ -622,13 +1143,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2.5rem 0 2.2rem 0;
-      margin: 0 auto 2.5rem auto;
+      padding: 2.75rem 0 2.42rem 0;
+      margin: 0 auto 0 auto;
       box-shadow: 0 2px 18px rgba(101, 115, 98, 0.04);
-      z-index: 2;
+      position: relative;
+      z-index: 1;
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 1s, transform 1s;
+      transition: all var(--transition-medium) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      font-size: 1.1em;
     }
     .countdown-block.visible {
       opacity: 1;
@@ -636,57 +1159,60 @@
     }
     .countdown-list {
       display: flex;
-      gap: 2.5rem;
+      gap: 2.75rem;
     }
     .countdown-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 70px;
+      min-width: 77px;
+      animation: bounceIn 0.6s ease-out;
     }
+
+    .countdown-item:nth-child(1) { animation-delay: 0.1s; }
+    .countdown-item:nth-child(2) { animation-delay: 0.2s; }
+    .countdown-item:nth-child(3) { animation-delay: 0.3s; }
+    .countdown-item:nth-child(4) { animation-delay: 0.4s; }
     .countdown-number {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.3rem;
+      font-family: 'Montserrat', serif !important;
+      font-size: 2.53rem;
       font-weight: 600;
       color: var(--rose);
       background: var(--cream);
-      border-radius: 18px;
-      padding: 0.5rem 1.2rem;
+      border-radius: 19.8px;
+      padding: 0.55rem 1.32rem;
       margin-bottom: 0.3rem;
-      box-shadow: 0 2px 10px rgba(189, 144, 141, 0.07);
+      box-shadow: var(--shadow-light);
+      text-transform: uppercase !important;
+      transition: all var(--transition-fast) ease;
+    }
+
+    .countdown-number.updated {
+      animation: numberPulse 0.3s ease-out;
+    }
+
+    @keyframes numberPulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
     .countdown-label {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--green-dark);
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', serif !important;
       opacity: 0.7;
       letter-spacing: 0.04em;
-    }
-    @media (max-width: 600px) {
-      .countdown-list {
-        gap: 1.1rem;
-      }
-      .countdown-number {
-        font-size: 1.3rem;
-        padding: 0.3rem 0.7rem;
-        border-radius: 10px;
-      }
-      .countdown-label {
-        font-size: 0.8rem;
-      }
-      .countdown-block {
-        padding: 1.2rem 0 1.1rem 0;
-      }
+      text-transform: uppercase !important;
     }
 
-    .dresscode-palette {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 2.5rem 0;
-      flex-wrap: wrap;
-    }
 
+    /* === DRESSCODE CLASSIC === */
     .dresscode-gallery {
       display: block;
       margin: 3.5rem 0 2rem 0;
@@ -695,7 +1221,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     .dresscode-row {
       display: flex;
       gap: 0;
@@ -745,10 +1270,6 @@
       box-shadow: 0 6px 24px rgba(101,115,98,0.10);
     }
     @media (max-width: 700px) {
-      .dresscode-gallery {
-        max-width: 98vw;
-        margin-top: 2.2rem;
-      }
       .dresscode-photo {
         width: 130px;
         height: 202px;
@@ -768,37 +1289,1199 @@
         margin-right: 0;
         margin-top: 10px;
       }
-      .photo-bg {
-        background-attachment: scroll;
-        background-position: top center;
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: var(--white);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--gray);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .footer-content {
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+    }
+
+    .footer-content p {
+      margin-bottom: 0.5rem;
+      color: var(--green-dark);
+      font-size: 1rem;
+    }
+
+    .footer-content p:last-child {
+      margin-bottom: 0;
+      font-style: italic;
+      color: var(--green-light);
+    }
+
+    /* === RESPONSIVE DESIGN === */
+    /* Десктопная версия - исправления для шапки */
+    @media (min-width: 1024px) {
+      header {
+        padding: 60px 40px !important;
+      }
+      
+      .header-bg {
+        background-position: center 40% !important;
+        background-size: 80% !important;
+        transform: scale(1) !important;
+      }
+      
+      .header-bg.visible {
+        transform: scale(1) !important;
+      }
+      
+      .header-overlay {
+        background: radial-gradient(circle at center, transparent 20%, var(--cream) 60%) !important;
+      }
+      
+      .header-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 0.8rem !important;
+      }
+      
+      .header-names {
+        font-size: 6rem !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.1 !important;
+      }
+      
+      .header-date {
+        font-size: 1.3rem !important;
+        margin-bottom: 0 !important;
+      }
+      
+      .header-content {
+        transform: translateY(0) !important;
+        max-width: 90% !important;
       }
     }
 
-    .tip-icon.surprise {
-      width: 2.166em;
-      height: 2.166em;
-      vertical-align: -0.45em;
-      margin-right: 0.4em;
+    /* Большие экраны - дополнительная оптимизация */
+    @media (min-width: 1200px) {
+      header {
+        padding: 80px 60px !important;
+      }
+      
+      .header-bg {
+        background-position: center 35% !important;
+        background-size: 70% !important;
+        transform: scale(1) !important;
+      }
+      
+      .header-bg.visible {
+        transform: scale(1) !important;
+      }
+      
+      .header-overlay {
+        background: radial-gradient(circle at center, transparent 15%, var(--cream) 55%) !important;
+      }
+      
+      .header-title {
+        font-size: 2rem !important;
+      }
+      
+      .header-names {
+        font-size: 7rem !important;
+      }
+      
+      .header-date {
+        font-size: 1.4rem !important;
+      }
+      
+      .header-content {
+        max-width: 80% !important;
+      }
     }
+
+    /* Очень большие экраны */
+    @media (min-width: 1400px) {
+      header {
+        padding: 100px 80px !important;
+      }
+      
+      .header-bg {
+        background-position: center 30% !important;
+        background-size: 60% !important;
+        transform: scale(1) !important;
+      }
+      
+      .header-bg.visible {
+        transform: scale(1) !important;
+      }
+      
+      .header-overlay {
+        background: radial-gradient(circle at center, transparent 10%, var(--cream) 50%) !important;
+      }
+      
+      .header-title {
+        font-size: 2.2rem !important;
+      }
+      
+      .header-names {
+        font-size: 8rem !important;
+      }
+      
+      .header-date {
+        font-size: 1.5rem !important;
+      }
+      
+      .header-content {
+        max-width: 70% !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .photo-section {
+        aspect-ratio: 16/9;
+        min-height: 350px;
+        max-height: 450px;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      
+      /* Consistent positioning for pexels-visoesdomundo-2808658.jpg across all screen sizes */
+      .photo-section#photo3 .photo-bg img {
+        object-position: center 42%;
+      }
+      
+      /* Consistent positioning for pexels-cottonbro-4908144.jpg across all screen sizes - show heads */
+      .photo-section#photo4 .photo-bg img {
+        object-position: center 30%;
+      }
+      
+      /* Consistent positioning for pexels-cottonbro-4908138.jpg across all screen sizes - lower display area */
+      .photo-section#photo1 .photo-bg img {
+        object-fit: cover !important;
+        object-position: center 0% !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 4rem 1rem;
+      }
+
+      .timing-minimal {
+        max-width: 100%;
+        padding: 0 1rem;
+      }
+
+      .timing-minimal-title {
+        font-size: 2rem;
+        letter-spacing: 0.2em;
+        margin-bottom: 3rem;
+      }
+
+      .timing-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .timing-grid::before {
+        left: 55px;
+        transform: none;
+      }
+
+      .timing-item {
+        grid-column: 1 !important;
+        justify-self: start !important;
+        text-align: left !important;
+        padding-left: 110px;
+        gap: 1rem;
+      }
+
+      .timing-item:nth-child(odd),
+      .timing-item:nth-child(even) {
+        order: 0;
+      }
+
+      .timing-item:nth-child(odd) .timing-content,
+      .timing-item:nth-child(even) .timing-content {
+        order: 2;
+        text-align: left;
+        align-items: flex-start;
+      }
+
+      .timing-item:nth-child(odd) .timing-icon,
+      .timing-item:nth-child(even) .timing-icon {
+        order: 1;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .timing-icon {
+        width: clamp(3rem, 6vw, 5.88rem);
+        height: clamp(3rem, 6vw, 5.88rem);
+        flex-shrink: 0;
+      }
+
+      .timing-minimal-time {
+        font-size: 2rem;
+        font-weight: 400;
+        font-family: 'Great Vibes', cursive;
+        font-style: italic;
+      }
+
+      .timing-minimal-desc {
+        font-size: 0.9rem;
+        color: var(--green-dark);
+        opacity: 1;
+        font-weight: 400;
+      }
+
+      .color-palette {
+        gap: 1rem;
+      }
+
+      .color-circle {
+        width: 50px;
+        height: 50px;
+      }
+
+      .photo-section {
+        aspect-ratio: 16/9;
+        min-height: 300px;
+        max-height: 40vh;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      
+      /* Consistent positioning for pexels-visoesdomundo-2808658.jpg across all screen sizes */
+      .photo-section#photo3 .photo-bg img {
+        object-position: center 39%;
+      }
+      
+      /* Consistent positioning for pexels-cottonbro-4908144.jpg across all screen sizes - show heads */
+      .photo-section#photo4 .photo-bg img {
+        object-position: center 30%;
+      }
+      
+      /* Consistent positioning for pexels-cottonbro-4908138.jpg across all screen sizes - lower display area */
+      .photo-section#photo1 .photo-bg img {
+        object-fit: cover !important;
+        object-position: center 0% !important;
+      }
+
+
+    }
+
+    @media (max-width: 700px) {
+      .dresscode-gallery {
+        max-width: 98vw;
+        margin-top: 2.2rem;
+      }
+      .dresscode-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+        gap: 0.8rem;
+      }
+      .dresscode-photo {
+        aspect-ratio: 4/5;
+        min-height: 150px;
+      }
+      .dresscode-photo.center {
+        grid-row: span 1;
+        grid-column: span 2;
+        aspect-ratio: 16/9;
+        min-height: 120px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      /* Header mobile styles */
+      header {
+        height: 100vh !important;
+        align-items: flex-start !important;
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+      }
+      .header-content {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .header-title {
+        text-align: center;
+        margin-bottom: 0;
+      }
+      .header-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+      }
+      .header-main .header-names {
+        margin-bottom: 0;
+      }
+      .header-main .header-date {
+        margin-top: 1rem;
+      }
+      .header-date {
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+        margin-bottom: 0;
+      }
+
+      /* Photo sections mobile */
+      .photo-section, .photo-section.from-left, .photo-section.from-right {
+        aspect-ratio: 16/9;
+        min-height: 250px;
+        max-height: 50vh;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      
+      /* Consistent positioning for pexels-visoesdomundo-2808658.jpg across all screen sizes */
+      .photo-section#photo3 .photo-bg img {
+        object-position: center 44%;
+      }
+      
+      /* Consistent positioning for pexels-cottonbro-4908144.jpg across all screen sizes - show heads */
+      .photo-section#photo4 .photo-bg img {
+        object-position: center 30%;
+      }
+      
+      /* Consistent positioning for pexels-cottonbro-4908138.jpg across all screen sizes - lower display area */
+      .photo-section#photo1 .photo-bg img {
+        object-fit: cover !important;
+        object-position: center 0% !important;
+      }
+      .photo-quote { font-size: 1.3rem; }
+      .photo-subtitle { font-size: 1rem; }
+
+      /* Упрощаем hover-эффекты на мобильных */
+      .dresscode-photo:hover,
+      .dresscode-photo.center:hover,
+      .timing-icon:hover {
+        transform: none !important;
+      }
+
+      /* Countdown mobile */
+      .countdown-list {
+        gap: 1.1rem;
+      }
+      .countdown-number {
+        font-size: 1.3rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 10px;
+      }
+      .countdown-label {
+        font-size: 0.8rem;
+      }
+      .countdown-block {
+        padding: 1.2rem 0 1.1rem 0;
+      }
+
+      /* Footer mobile */
+      footer {
+        padding: 2rem 1rem;
+      }
+    }
+
+    /* === IMAGE FALLBACKS === */
+    .photo-bg img:not([src]), 
+    .photo-bg img[src=""],
+    .dresscode-photo:not([src]), 
+    .dresscode-photo[src=""]::after,
+    .timing-icon:not([src]), 
+    .timing-icon[src=""] {
+      opacity: 0.3;
+      filter: grayscale(1);
+    }
+
+    .photo-bg img:not([src])::after, 
+    .dresscode-photo:not([src])::after,
+    .timing-icon:not([src])::after {
+      content: '🖼️';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      opacity: 0.5;
+    }
+
+    /* Стили для изображений с ошибками загрузки */
+    .photo-bg img.error,
+    .dresscode-photo.error,
+    .timing-icon.error {
+      opacity: 0.5;
+      filter: grayscale(1) brightness(0.8);
+      background: linear-gradient(45deg, var(--gray) 25%, transparent 25%), 
+                  linear-gradient(-45deg, var(--gray) 25%, transparent 25%), 
+                  linear-gradient(45deg, transparent 75%, var(--gray) 75%), 
+                  linear-gradient(-45deg, transparent 75%, var(--gray) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+
+    .photo-bg img.error::after,
+    .dresscode-photo.error::after,
+    .timing-icon.error::after {
+      content: '⚠️';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      opacity: 0.7;
+      z-index: 10;
+    }
+
+    #dresscode h2 {
+      font-size: clamp(2.88rem, 5.76vw, 4.32rem) !important;
+    }
+
+    #tips h2 {
+      font-size: clamp(2.88rem, 5.76vw, 4.32rem) !important;
+    }
+
+    .timing-icon.photo-small {
+      width: 6.3rem !important;
+      height: 6.3rem !important;
+      min-width: 6.3rem !important;
+      min-height: 6.3rem !important;
+      max-width: 6.3rem !important;
+      max-height: 6.3rem !important;
+    }
+
+    .timing-minimal-item:nth-child(odd) .timing-icon.photo-small {
+      right: calc(50% - 4rem) !important;
+    }
+
+    .timing-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 2;
+    }
+    .timing-minimal-item:nth-child(odd) .timing-content {
+      text-align: left;
+      position: absolute;
+      left: calc(50% + 1.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      align-items: flex-start;
+    }
+    .timing-minimal-item:nth-child(even) .timing-content {
+      text-align: right;
+      position: absolute;
+      right: calc(50% + 1.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      align-items: flex-end;
+    }
+
+    @media (max-width: 900px) {
+      .photo-quote {
+        font-size: 1.72em !important;
+      }
+      .photo-subtitle {
+        font-size: 1.72em !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .photo-quote {
+        font-size: 1.43em !important;
+      }
+      .photo-subtitle {
+        font-size: 1.43em !important;
+      }
+    }
+
+    @media (min-width: 600px) {
+      #venue img[alt*="Карта"] {
+        max-width: 980px !important;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .header-title {
+        margin-bottom: 2.8rem !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #invitation h2 {
+        line-height: 0.9 !important;
+      }
+      #invitation p {
+        line-height: 0.9 !important;
+      }
+    }
+
+    #invitation p {
+      line-height: 1.1 !important;
+    }
+
+    #dresscode p {
+      line-height: 1.1 !important;
+    }
+
+    @media (max-width: 600px) {
+      .header-title {
+        font-size: clamp(3.39rem, 2.0vw, 1.50rem) !important;
+        text-transform: uppercase !important;
+      }
+    }
+
+    #tips p {
+      line-height: 1.1 !important;
+    }
+
+    /* CSS для новой структуры */
+    .tip-item {
+      display: grid;
+      grid-template-columns: 3.5em 1fr;
+      align-items: flex-start;
+      margin-bottom: 2.2rem;
+    }
+    .tip-icon {
+      width: 3em;
+      height: 3em;
+      object-fit: contain;
+      margin-top: 0.2em;
+    }
+    .tip-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .tip-content h3 {
+      margin: 0 0 0.5rem 0;
+    }
+    .tip-content p {
+      margin: 0;
+    }
+
+    .tip-content h3, .tip-content p {
+      text-align: left !important;
+    }
+
+    .tip-content h3 {
+      font-size: 0.7rem !important;
+      font-style: normal !important;
+    }
+    .tip-content p {
+      font-size: 0.99rem !important;
+    }
+    .tip-icon {
+      width: 3em;
+      height: 3em;
+    }
+
+    .tip-icon-surprise {
+      width: 3.6em !important;
+      height: 3.6em !important;
+    }
+
+    .tip-item .tip-icon-surprise {
+      width: 2.93em !important;
+      height: 2.93em !important;
+      min-width: 2.93em !important;
+      min-height: 2.93em !important;
+      max-width: 2.93em !important;
+      max-height: 2.93em !important;
+    }
+
+    @media (max-width: 600px) {
+      .tip-content h3 {
+        font-size: 0.7rem !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #tips .tip-content h3 {
+        font-size: 1.1rem !important;
+      }
+    }
+
+    .tip-content h3 {
+      font-size: 1.15rem !important;
+      font-style: normal !important;
+      text-align: center !important;
+    }
+
+    @media (max-width: 600px) {
+      #tips .tip-content h3 {
+        font-size: 1.1rem !important;
+        text-align: left !important;
+      }
+    }
+
+    @media (min-width: 700px) {
+      #tips {
+        max-width: 900px;
+        margin: 0 auto;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body .header-title {
+        font-size: 1.8rem !important;
+        font-weight: 460 !important;
+      }
+      body .header-date {
+        font-weight: 460 !important;
+      }
+    }
+
+    @media (min-width: 601px) {
+      body .header-date {
+        font-weight: 460 !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .countdown-block {
+        padding: 1.44rem 0 1.32rem 0;
+        font-size: 1.32em;
+      }
+      .countdown-list {
+        gap: 0.56rem;
+      }
+      .countdown-item {
+        min-width: 92px;
+      }
+      .countdown-number {
+        font-size: 1.56rem;
+        padding: 0.36rem 0.84rem;
+        border-radius: 12px;
+      }
+      .countdown-label {
+        font-size: 0.96rem;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      body .photo-quote {
+        font-size: 2.2rem !important;
+        font-family: 'Great Vibes', cursive !important;
+        font-style: normal !important;
+      }
+      body .photo-subtitle {
+        font-size: 0.9rem !important;
+        font-family: 'Montserrat', serif !important;
+        font-style: italic !important;
+      }
+    }
+
+
+    @media (min-width: 600px) {
+      .countdown-list {
+        gap: 1.5rem;
+      }
+    }
+
+    #venue {
+      padding-bottom: 2rem !important;
+    }
+
+    
+    /* По умолчанию (мобильные) */
+    .photo-section .photo-content {
+      transform: translateY(160%) !important;
+    }
+
+    
+    /* Планшеты */
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .photo-section .photo-content {
+        transform: translateY(240%) !important;
+      }
+    }
+
+    /* Десктопы */
+    @media (min-width: 1025px) {
+      .photo-section .photo-content {
+        transform: translateY(290%) !important;
+      }
+    }
+
+    #rsvp p {
+      line-height: 1.1 !important;
+    }
+
+    /* Все фото в .photo-section чуть прозрачнее */
+    .photo-section .photo-bg img {
+      opacity: 0.85;
+    }
+
+    /* Не трогать фото в шапке и Screenshot_7.jpg */
+    header .photo-bg img,
+    .venue-photo-block img[src*="Screenshot_7.jpg"] {
+      opacity: 1 !important;
+    }
+
+    /* По умолчанию (мобильные) — как сейчас */
+    .venue-photo-block img {
+      width: 100vw;
+      max-width: 100vw;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Планшеты и десктопы */
+    @media (min-width: 601px) {
+      .venue-photo-block {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        transform: none;
+      }
+      .venue-photo-block img {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        border-radius: 20px;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    #start-overlay {
+      position: fixed;
+      z-index: 99999;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    
+    .envelope-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    /* Анимированная стрелка */
+    .arrow-container {
+      position: absolute;
+      top: 37%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: arrowBounce 2s ease-in-out 3s infinite;
+      z-index: 10;
+    }
+    
+    .arrow {
+      filter: drop-shadow(0 2px 8px rgba(189,144,141,0.3));
+    }
+    
+    @keyframes arrowBounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+    
+    /* Текст приглашения */
+    .invitation-text {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      text-align: center;
+      max-width: 80%;
+    }
+    
+    .invitation-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.2rem;
+      color: var(--rose);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 12px rgba(189,144,141,0.18);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      margin-top: -20px;
+    }
+    
+    .invitation-subtitle {
+      font-family: 'Montserrat', serif;
+      font-size: 1.2rem;
+      color: var(--green-dark);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 8px rgba(101,115,98,0.15);
+      line-height: 1.3;
+      margin-top: 80px !important;
+    }
+    
+    /* Конверт */
+    .envelope-wrapper {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .envelope-wrapper:hover {
+      transform: scale(1.05);
+    }
+    
+    .envelope-seal,
+    .envelope-cracked {
+      width: 300px;
+      height: auto;
+      max-width: 80vw;
+      filter: drop-shadow(0 8px 25px rgba(101,115,98,0.15));
+      transition: all 0.3s ease;
+    }
+    
+    .envelope-seal {
+      opacity: 0;
+      transform: scale(0.1) translateY(100vh);
+      animation: envelopeFlyIn 3s ease-out forwards;
+    }
+    
+    @keyframes envelopeFlyIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.1) translateY(100vh);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(0.8) translateY(20vh);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    
+    .envelope-cracked {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    
+    .envelope-cracked.show {
+      opacity: 1;
+      transform: scale(1);
+      animation: crackEffect 0.5s ease-out;
+    }
+    
+    @keyframes crackEffect {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.1) rotate(2deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+    
+    /* Анимация появления текста и стрелки */
+    .invitation-text.show {
+      animation: textFadeIn 2s ease-out forwards;
+    }
+    
+    .arrow-container.show {
+      opacity: 1 !important;
+      animation: arrowFadeIn 2s ease-out 0.5s forwards, arrowBounce 2s ease-in-out 2.5s infinite;
+    }
+    
+    @keyframes textFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    
+    @keyframes arrowFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .invitation-title {
+        font-size: 3rem;
+        margin-top: -30px;
+      }
+      .invitation-subtitle {
+        font-size: 1rem;
+        margin-top: 50px !important;
+      }
+      .envelope-seal,
+      .envelope-cracked {
+        width: 250px;
+      }
+      .arrow {
+        width: 31px;
+        height: 63px;
+      }
+      #venue h2 {
+        margin-top: 80px;
+        margin-bottom: 0px;
+      }
+    }
+    
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .invitation-subtitle {
+        margin-top: 30px !important;
+      }
+      .arrow-container {
+        top: 35.5% !important;
+      }
+      .arrow {
+        width: 48px !important;
+        height: 68px !important;
+      }
+    }
+    
+    @media (min-width: 1025px) {
+      .arrow-container {
+        top: 35.5% !important;
+      }
+      .arrow {
+        width: 48px !important;
+        height: 68px !important;
+      }
+    }
+
+    #intro-video-overlay {
+      position: fixed;
+      z-index: 99998;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      /* background: #000; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    #intro-video-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #intro-video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: block;
+    }
+
+    .welcome-text {
+      display: block;
+      font-family: 'Montserrat', serif;
+      font-size: 2.1rem;
+      color: var(--rose);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 12px rgba(189,144,141,0.18);
+      opacity: 0;
+      transition: opacity 0.7s;
+    }
+    @media (max-width: 600px) {
+      .welcome-text { font-size: 1.2rem; }
+    }
+
+    #video-bg-overlay {
+      position: fixed;
+      z-index: 99997;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      background: url('phon.jpg') center center/cover no-repeat;
+      opacity: 1;
+      transition: opacity 0.7s;
+      pointer-events: none;
+      display: none;
+    }
+    #video-bg-overlay.active { display: block; }
+    #video-bg-overlay.hide { opacity: 0; }
+
+    .venue-info {
+      text-align: center;
+      margin: 1.5rem 0;
+      padding: 0 1rem;
+    }
+
+    /* Центрирование адреса на планшетах и десктопе */
+    @media (min-width: 601px) {
+      .venue-info {
+        text-align: center;
+        max-width: 600px;
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+      }
+    }
+    
+    .venue-info p {
+      font-family: 'Montserrat', serif;
+      font-size: 1.1rem;
+      color: var(--green-dark);
+      line-height: 1.6;
+      margin: 0;
+    }
+    
+    .venue-info strong {
+      font-weight: 600;
+      color: var(--rose);
+    }
+    
+    .venue-map-link {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      text-align: center;
+    }
+
+    /* Поднимаем кнопку карты на планшетах и десктопе */
+    @media (min-width: 601px) {
+      .venue-map-link {
+        bottom: 60px;
+      }
+    }
+    
+    .venue-map-link a {
+      white-space: nowrap;
+    }
+    
+    @media (max-width: 600px) {
+      #venue {
+        padding: 0 !important;
+      }
+      .venue-photo-block {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        position: relative !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+      }
+      .venue-photo-block img {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        display: block !important;
+      }
+      .venue-info {
+        margin: 1rem 0;
+        padding: 0 1rem;
+      }
+      .venue-info p {
+        font-size: 1rem;
+      }
+    }
+
+
   </style>
+
+
+
 </head>
 <body>
+<!-- Стартовый интро-экран с конвертом -->
+<div id="start-overlay">
+  <div class="envelope-container">
+    <!-- Анимированная стрелка -->
+    <div class="arrow-container">
+      <svg class="arrow" width="48" height="98" viewBox="0 0 48 98">
+        <path d="M24 5 L24 93 M19 88 L24 93 L29 88" stroke="#bd908d" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    
+    <!-- Текст приглашения -->
+    <div class="invitation-text">
+      <div class="invitation-title">Приглашение на свадьбу</div>
+      <div class="invitation-subtitle">Нажмите, чтобы открыть</div>
+    </div>
+    
+    <!-- Конверт с сургучом -->
+    <div class="envelope-wrapper">
+      <img src="pechat/seal.png" alt="Конверт с сургучной печатью" class="envelope-seal" id="envelopeSeal">
+      <img src="pechat/cracked seal.png" alt="Конверт с треснувшей печатью" class="envelope-cracked" id="envelopeCracked" style="display: none;">
+    </div>
+  </div>
+</div>
+<!-- Видео-интро -->
+<div id="intro-video-overlay" style="display:none;">
+  <video id="intro-video" src="NAZERKE&SERGEY1 vert.mov.mp4" playsinline preload="auto" style="width:100vw;height:100vh;object-fit:cover;display:block;" muted></video>
+</div>
+
+<!-- Фон для видео-интро -->
+<div id="video-bg-overlay"></div>
+
+
 
 <header>
   <div class="header-bg" id="headerBg"></div>
   <div class="header-overlay"></div>
-  <div class="header-content" id="headerContent">
-    <h1 class="header-title">Приглашение на свадьбу</h1>
-    <h2 class="header-names">
-      Назерке<br>
-      <span style="display:inline-block; font-size:1.2em; line-height:1; color:var(--rose); font-family:'Great Vibes',cursive;">&amp;</span><br>
-      Сергей
-    </h2>
-    <p class="header-date">20 сентября 2025 года</p>
+    <div class="header-content" id="headerContent">
+    <div class="header-calendar-image">
+      <img src="date.png" alt="Календарь свадьбы" class="calendar-img">
+    </div>
+    <div class="header-main">
+      <h2 class="header-names">
+        Назерке<br>
+        <span style="display:inline-block; font-size:0.7776em; line-height:1; color:var(--rose); font-family:'Great Vibes',cursive;">&amp;</span><br>
+        Сергей
+      </h2>
+      <p class="header-date"></p>
+    </div>
   </div>
 </header>
 
-<div class="countdown-block" id="countdownBlock">
+<main>
+  <div class="countdown-block" id="countdownBlock" aria-label="Обратный отсчёт до свадьбы">
   <div class="countdown-list">
     <div class="countdown-item">
       <span class="countdown-number" id="cd-days">0</span>
@@ -819,54 +2502,6 @@
   </div>
 </div>
 
-<section id="timing">
-  <div class="timing-minimal">
-    <div class="timing-minimal-title">ТАЙМИНГ</div>
-    <div class="timing-minimal-item">
-      <div class="timing-minimal-time">
-        <span class="timing-minimal-line"></span>
-        15:00
-        <span class="timing-minimal-line"></span>
-      </div>
-      <div class="timing-minimal-desc">Сбор гостей</div>
-    </div>
-    <div class="timing-minimal-item">
-      <div class="timing-minimal-time">
-        <span class="timing-minimal-line"></span>
-        15:30
-        <span class="timing-minimal-line"></span>
-      </div>
-      <div class="timing-minimal-desc">Торжественная церемония</div>
-    </div>
-    <div class="timing-minimal-item">
-      <div class="timing-minimal-time">
-        <span class="timing-minimal-line"></span>
-        16:00
-        <span class="timing-minimal-line"></span>
-      </div>
-      <div class="timing-minimal-desc">Фуршет</div>
-    </div>
-    <div class="timing-minimal-item">
-      <div class="timing-minimal-time">
-        <span class="timing-minimal-line"></span>
-        17:00
-        <span class="timing-minimal-line"></span>
-      </div>
-      <div class="timing-minimal-desc">Праздничный ужин</div>
-    </div>
-  </div>
-</section>
-
-<div class="photo-section from-left" id="photo1">
-  <div class="photo-bg" style="background-image: url('pexels-cottonbro-4908138.jpg');"></div>
-  <div class="photo-overlay">
-    <div class="photo-content">
-      <div class="photo-quote">Любовь — это величайшее чудо</div>
-      <div class="photo-subtitle">Делимся этим счастьем с вами</div>
-    </div>
-  </div>
-</div>
-
 <section id="invitation">
   <h2>Дорогие, родные и близкие</h2>
   <p>Мы давно ждали момента, когда сможем разделить с вами самый важный и счастливый день в нашей жизни.<br>
@@ -875,12 +2510,60 @@
   <div class="section-divider"></div>
 </section>
 
-<div class="photo-section from-right" id="photo2">
-  <div class="photo-bg" style="background-image: url('pexels-pixabay-258421.jpg'); background-position: center -200px;"></div>
+<div class="photo-section from-left" id="photo1">
+  <picture class="photo-bg">
+    <img src="pexels-cottonbro-4908138.jpg" alt="Романтическая пара" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
+  </picture>
   <div class="photo-overlay">
     <div class="photo-content">
-      <div class="photo-quote">Вместе навсегда</div>
-      <div class="photo-subtitle">Начинаем новую главу нашей истории</div>
+      <div class="photo-quote">Вера</div>
+      
+    </div>
+  </div>
+</div>
+
+<section id="timing">
+  <div class="timing-minimal">
+    <div class="timing-minimal-title">Тайминг</div>
+    <div class="timing-minimal-item">
+      <img src="icons/Love.png" class="timing-icon" alt="Любовь" loading="lazy">
+      <div class="timing-content">
+        <div class="timing-minimal-time">15:00</div>
+        <div class="timing-minimal-desc">Сбор гостей</div>
+      </div>
+    </div>
+    <div class="timing-minimal-item">
+      <img src="icons/rings.png" class="timing-icon" alt="Кольца" loading="lazy">
+      <div class="timing-content">
+        <div class="timing-minimal-time">15:30</div>
+        <div class="timing-minimal-desc">Торжественная<br>церемония</div>
+      </div>
+    </div>
+    <div class="timing-minimal-item">
+      <img src="icons/photo.png" class="timing-icon photo-small" alt="Фото" loading="lazy">
+      <div class="timing-content">
+        <div class="timing-minimal-time">16:00</div>
+        <div class="timing-minimal-desc">Время фото</div>
+      </div>
+    </div>
+    <div class="timing-minimal-item">
+      <img src="icons/eat.png" class="timing-icon" alt="Еда" loading="lazy">
+      <div class="timing-content">
+        <div class="timing-minimal-time">17:00</div>
+        <div class="timing-minimal-desc">Праздничный<br>ужин</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="photo-section from-right" id="photo2">
+  <picture class="photo-bg">
+    <img src="pexels-pixabay-258421.jpg" alt="Счастливая пара" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
+  </picture>
+  <div class="photo-overlay">
+    <div class="photo-content">
+      <div class="photo-quote">Надежда</div>
+      
     </div>
   </div>
 </div>
@@ -890,12 +2573,11 @@
   <p>Для нас главное — ваше присутствие.<br>
   Но мы будем рады, если в своих нарядах вы поддержите цветовую гамму и стиль нашей свадьбы.</p>
   <div class="color-palette dresscode-palette">
-    <div class="color-circle color-black" title="Чёрный"></div>
-    <div class="color-circle color-white" title="Белый"></div>
-    <div class="color-circle color-beige1" title="Бежевый 1"></div>
-    <div class="color-circle color-beige2" title="Бежевый 2"></div>
-    <div class="color-circle color-beige3" title="Бежевый 3"></div>
-    <div class="color-circle color-beige4" title="Бежевый 4"></div>
+    <div class="color-circle color-dress1" title="Цвет 1"></div>
+    <div class="color-circle color-dress2" title="Цвет 2"></div>
+    <div class="color-circle color-dress3" title="Цвет 3"></div>
+    <div class="color-circle color-dress4" title="Цвет 4"></div>
+    <div class="color-circle color-dress5" title="Цвет 5"></div>
   </div>
   <div class="dresscode-gallery">
     <div class="dresscode-row">
@@ -912,11 +2594,12 @@
 </section>
 
 <div class="photo-section from-left" id="photo3">
-  <div class="photo-bg" style="background-image: url('pexels-visoesdomundo-2808658.jpg'); background-position: center -650px;"></div>
+  <picture class="photo-bg">
+    <img src="pexels-visoesdomundo-2808658.jpg" alt="Романтический момент" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
+  </picture>
   <div class="photo-overlay">
     <div class="photo-content">
-      <div class="photo-quote">Создаём воспоминания</div>
-      <div class="photo-subtitle">Которые останутся с нами навсегда</div>
+      <div class="photo-quote">Любовь</div>
     </div>
   </div>
 </div>
@@ -924,67 +2607,94 @@
 <section id="tips">
   <h2>Подсказки</h2>
 
-  <h3><img src="icon-surprise-.png" class="tip-icon" alt="Сюрприз">Сюрприз</h3>
-  <p>Возьмите с собой отличное настроение.<br>
-  Приветствуется ваше поздравление и активное участие в интерактивах и творческих выступлениях.<br>
-  Вы можете обратиться к нашему организатору для воплощения своих идей:<br>
-  Анастасия — +7 700 097 55 77</p>
+  <div class="tip-item">
+    <img src="icons/surprise.png" class="tip-icon tip-icon-surprise" alt="Сюрприз" loading="lazy">
+    <div class="tip-content">
+      <h3>Сюрприз</h3>
+      <p>Возьмите с собой отличное настроение.<br>
+      Приветствуется ваше поздравление и активное участие в интерактивах и творческих выступлениях.<br>
+      Вы можете обратиться к нашему организатору для воплощения своих идей:<br>
+      Маргарита — +7 771 980 59 85</p>
+    </div>
+  </div>
 
-  <h3><img src="Дизайн без названия.png" class="tip-icon" alt="Что дарить">Что дарить</h3>
-  <p>Будем рады любому проявлению вашей заботы.<br>
-  Если вы хотите поддержать наш семейный бюджет, это точно поможет воплотить нашу мечту в реальность.</p>
+  <div class="tip-item">
+    <img src="what-to-give.png" class="tip-icon" alt="Что дарить" aria-hidden="true" loading="lazy">
+    <div class="tip-content">
+      <h3>Что дарить</h3>
+      <p>Будем рады любому проявлению вашей заботы.<br>
+      Если вы хотите поддержать наш семейный бюджет, это точно поможет воплотить нашу мечту в реальность.</p>
+    </div>
+  </div>
 
-  <h3><img src="question.png" class="tip-icon" alt="Что делать, если...">Что делать, если...</h3>
-  <p>Если у вас появились вопросы, то задать их можно нашему замечательному организатору:<br>
-  Анастасия — +7 700 097 55 77</p>
+  <div class="tip-item">
+    <img src="question.png" class="tip-icon" alt="Что делать, если..." aria-hidden="true" loading="lazy">
+    <div class="tip-content">
+      <h3>Что делать, если...</h3>
+      <p>Если у вас появились вопросы, то задать их можно нашему замечательному организатору:<br>
+      Маргарита — +7 771 980 59 85</p>
+    </div>
+  </div>
 
-  <h3><img src="kid.png" class="tip-icon" alt="Маленькие гости">Маленькие гости</h3>
-  <p>Дорогие гости, мы будем благодарны, если вы проведёте нашему дню всё своё внимание и энергию.<br>
-  Вы сможете получить настоящее удовольствие и полностью погрузиться в атмосферу праздника.<br>
-  Мы будем признательны, если наш праздник пройдет вокруг взрослых.</p>
+  <div class="tip-item">
+    <img src="kid.png" class="tip-icon" alt="Маленькие гости" aria-hidden="true" loading="lazy">
+    <div class="tip-content">
+      <h3>Маленькие гости</h3>
+      <p>Дорогие гости, мы будем благодарны, если вы посвятите нашему дню всё своё внимание и энергию.<br>
+      Вы сможете получить настоящее удовольствие и полностью погрузиться в атмосферу праздника.<br>
+      Мы будем признательны, если наш праздник пройдет в кругу взрослых.</p>
+    </div>
+  </div>
 
-  <h3><svg class="tip-icon camera" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="2" fill="#9aa795"/><circle cx="12" cy="13" r="3" fill="#fff"/><circle cx="12" cy="13" r="1" fill="#9aa795"/><rect x="8" y="8" width="2" height="2" rx="1" fill="#fff"/></svg>Фотографии</h3>
-  <p>Поделитесь фотографиями с нами:<br>
-  <span class="hashtag">#НазеркеСергей2025</span></p>
+  <div class="tip-item">
+    <img src="icons/photo.png" class="tip-icon camera" alt="Фотографии" aria-hidden="true" loading="lazy" />
+    <div class="tip-content">
+      <h3>Фотографии</h3>
+      <p>Поделитесь фотографиями с нами:<br>
+      <span class="hashtag">#НазеркеСергей2025</span></p>
+    </div>
+  </div>
 </section>
 
 <div class="photo-section from-right" id="photo4">
-  <div class="photo-bg" style="background-image: url('pexels-cottonbro-4908144.jpg'); background-position: center -500px;"></div>
+  <picture class="photo-bg">
+    <img src="pexels-cottonbro-4908144.jpg" alt="Место проведения свадьбы" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
+  </picture>
   <div class="photo-overlay">
     <div class="photo-content">
-      <div class="photo-quote">Место нашей встречи</div>
-      <div class="photo-subtitle">Где начнётся наше путешествие</div>
+      <div class="photo-quote">Но любовь из них больше</div>
+      
     </div>
   </div>
 </div>
 
 <section id="venue">
   <h2>Место проведения</h2>
-  <p>Винотека, ресторан<br>
-  Алматы, Казахстан<br>
-  Улица Гагарина, 12</p>
-  <p>Пожалуйста, используйте карту для перехода в навигацию, чтобы добраться по местоположению.</p>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.434963364279!2d76.91115241545352!3d43.23894987913651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x388369183b5a5f1f%3A0xc8dd7f2272d1c9e1!2sGagarina%2012%2C%20Almaty%20050000%2C%20Kazakhstan!5e0!3m2!1sen!2s!4v1626100963955!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+  <div class="venue-info">
+    <p>Tabi Village<br>
+    СТ Заповедник, 75<br>
+    Талгарский район, Алматинская область</p>
+  </div>
+  <div class="venue-photo-block">
+    <img src="Screenshot_7.jpg" alt="Карта Tabi Village в 2ГИС">
+    <div class="venue-map-link">
+      <a href="https://2gis.kz/almaty/firm/70000001081868450" target="_blank" rel="noopener" class="map-link">Открыть на карте 2ГИС</a>
+    </div>
+  </div>
 </section>
 
 <section id="rsvp">
-  <h2>С нетерпением ждём вас!</h2>
-  <p>20 сентября 2025 года<br>
-  Винотека, ресторан</p>
-  <form id="rsvpForm">
-    <input type="text" placeholder="Имя и фамилия" required>
-    <input type="number" placeholder="Количество персон" required>
-    <input type="tel" placeholder="Номер телефона" required>
-    <select required>
-      <option value="">Планируете ли присутствовать?</option>
-      <option value="yes">Да</option>
-      <option value="no">Нет</option>
-    </select>
-    <button type="submit" class="btn">Отправить регистрацию</button>
-  </form>
-
-  <a href="https://t.me/your_chat_link" class="btn">Перейти в чат Telegram</a>
+ 
+  <p>Пожалуйста пройдите регистрацию до 31.08.2025</p>
+  <a href="https://t.me/your_chat_link" class="btn" aria-label="Зарегистрироваться через Telegram бота">Зарегистрироваться</a>
 </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p>С любовью, Назерке и Сергей</p>
+  </div>
+</footer>
 
 <script>
   // Intersection Observer for animations
@@ -994,9 +2704,24 @@
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        // Для фото-секций ждём загрузки фото
+        if (entry.target.classList.contains('photo-section')) {
+          const img = entry.target.querySelector('.photo-bg img');
+          if (img && !img.classList.contains('loaded')) {
+            img.addEventListener('load', () => {
+              entry.target.classList.add('visible');
+            }, { once: true });
+          } else {
+            entry.target.classList.add('visible');
+          }
+        } else {
+          // Для обычных секций
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+        }
       }
     });
   }, observerOptions);
@@ -1013,18 +2738,44 @@
 
   // Initialize header animations on load
   window.addEventListener('load', function() {
+    // Показываем прогресс загрузки
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--green-light));
+      z-index: 9999;
+      transition: width 0.3s ease;
+    `;
+    document.body.appendChild(progressBar);
+
+    // Анимируем прогресс
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress > 90) progress = 90;
+      progressBar.style.width = progress + '%';
+    }, 100);
+
+    // Завершаем загрузку
+    setTimeout(() => {
+      clearInterval(progressInterval);
+      progressBar.style.width = '100%';
+      
+      setTimeout(() => {
+        progressBar.remove();
     document.getElementById('headerBg').classList.add('visible');
     setTimeout(() => {
       document.getElementById('headerContent').classList.add('visible');
     }, 500);
+      }, 300);
+    }, 1000);
   });
 
-  // RSVP Form submission
-  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Спасибо за ответ! Мы с нетерпением ждем встречи с вами!');
-    this.reset();
-  });
+
 
   // Smooth scrolling for any anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1049,10 +2800,26 @@
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
-    document.getElementById('cd-days').textContent = days;
-    document.getElementById('cd-hours').textContent = hours;
-    document.getElementById('cd-minutes').textContent = minutes;
-    document.getElementById('cd-seconds').textContent = seconds;
+    
+    // Обновляем числа с анимацией
+    const elements = [
+      { id: 'cd-days', value: days },
+      { id: 'cd-hours', value: hours },
+      { id: 'cd-minutes', value: minutes },
+      { id: 'cd-seconds', value: seconds }
+    ];
+    
+    elements.forEach(({ id, value }) => {
+      const element = document.getElementById(id);
+      const currentValue = parseInt(element.textContent);
+      if (currentValue !== value) {
+        element.textContent = value;
+        element.classList.add('updated');
+        setTimeout(() => {
+          element.classList.remove('updated');
+        }, 300);
+      }
+    });
   }
   setInterval(updateCountdownBlock, 1000);
   updateCountdownBlock();
@@ -1062,12 +2829,226 @@
   const countdownObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        setTimeout(() => {
         countdownBlock.classList.add('visible');
+        }, 500); // Задержка для более плавного появления
       }
     });
   }, { threshold: 0.1 });
   countdownObserver.observe(countdownBlock);
+
+  // Плавная загрузка изображений
+  function loadImage(img) {
+    return new Promise((resolve, reject) => {
+      if (img.complete && img.naturalWidth > 0) {
+        resolve(img);
+      } else {
+        img.addEventListener('load', () => resolve(img));
+        img.addEventListener('error', () => {
+          console.warn(`Не удалось загрузить изображение: ${img.src}`);
+          // Добавляем fallback класс
+          img.classList.add('error');
+          reject(new Error(`Failed to load image: ${img.src}`));
+        });
+      }
+    });
+  }
+
+  // Загрузка изображений в галерее дресс-кода
+  const dresscodePhotos = document.querySelectorAll('.dresscode-photo');
+  dresscodePhotos.forEach((img, index) => {
+    loadImage(img).then(() => {
+      setTimeout(() => {
+        img.classList.add('loaded');
+      }, index * 150); // Задержка для каждого следующего изображения
+    }).catch(() => {
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+      img.classList.add('error');
+    });
+  });
+
+  // Загрузка изображений в фото-секциях
+  const photoSectionImages = document.querySelectorAll('.photo-bg img');
+  photoSectionImages.forEach((img, index) => {
+    loadImage(img).then(() => {
+      setTimeout(() => {
+        img.classList.add('loaded');
+      }, index * 300); // Задержка для каждого следующего изображения
+    }).catch(() => {
+      img.style.opacity = '1';
+      img.classList.add('error');
+    });
+  });
+
+  // Загрузка иконок в тайминге
+  const timingIcons = document.querySelectorAll('.timing-icon');
+  timingIcons.forEach((img, index) => {
+    loadImage(img).then(() => {
+      setTimeout(() => {
+        img.classList.add('loaded');
+      }, index * 200); // Задержка для каждой следующей иконки
+    }).catch(() => {
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+      img.classList.add('error');
+    });
+  });
+
+  // Интерактивный стартовый экран с конвертом и видео-интро
+  const startOverlay = document.getElementById('start-overlay');
+  const envelopeSeal = document.getElementById('envelopeSeal');
+  const envelopeCracked = document.getElementById('envelopeCracked');
+  const envelopeWrapper = document.querySelector('.envelope-wrapper');
+  const invitationText = document.querySelector('.invitation-text');
+  const arrowContainer = document.querySelector('.arrow-container');
+  const introVideoOverlay = document.getElementById('intro-video-overlay');
+  const introVideo = document.getElementById('intro-video');
+  const mainHeader = document.querySelector('header');
+  const videoBgOverlay = document.getElementById('video-bg-overlay');
+  const introMusic = document.getElementById('intro-music');
+
+  // Флаг для предотвращения повторных кликов
+  let envelopeClicked = false;
+
+  function showVideoIntro() {
+    // Скрыть стартовый экран
+    startOverlay.style.opacity = '0';
+    setTimeout(() => { startOverlay.style.display = 'none'; }, 700);
+    // Показать фон для видео-интро
+    if (videoBgOverlay) {
+      videoBgOverlay.classList.add('active');
+      videoBgOverlay.classList.remove('hide');
+    }
+    // Показать видео-интро
+    introVideoOverlay.style.display = 'flex';
+    setTimeout(() => { introVideoOverlay.classList.add('active'); }, 10);
+    // Скрыть header полностью
+    if (mainHeader) {
+      mainHeader.style.opacity = '0';
+      mainHeader.style.transition = 'none';
+      const headerBg = document.getElementById('headerBg');
+      const headerContent = document.getElementById('headerContent');
+      if (headerBg) headerBg.classList.remove('visible');
+      if (headerContent) headerContent.classList.remove('visible');
+    }
+    // Запустить видео
+    introVideo.currentTime = 0;
+    introVideo.style.opacity = '1';
+    introVideo.play();
+
+    // Fade out видео за 1.2 сек до конца
+    introVideo.onplay = function() {
+      const duration = introVideo.duration || 5.5;
+      setTimeout(() => {
+        // Запустить fade out видео
+        introVideo.style.transition = 'opacity 1.2s';
+        introVideo.style.opacity = '0';
+        // Плавно скрыть фон для видео
+        if (videoBgOverlay) {
+          videoBgOverlay.classList.add('hide');
+        }
+      }, (duration - 1.2) * 1000);
+    };
+
+    // Запустить музыку
+    if (introMusic) {
+      introMusic.currentTime = 0;
+      introMusic.volume = 0.7; // Устанавливаем громкость
+      introMusic.play().catch((error) => {
+        console.log('Не удалось запустить музыку:', error);
+        // Попробуем запустить снова после взаимодействия пользователя
+        document.addEventListener('click', function startMusic() {
+          introMusic.play().catch(() => {});
+          document.removeEventListener('click', startMusic);
+        }, { once: true });
+      });
+    }
+  }
+
+  function endVideoIntro() {
+    // Показать header с анимацией только после исчезновения фона
+    setTimeout(() => {
+      if (mainHeader) {
+        mainHeader.style.opacity = '1';
+        mainHeader.style.transition = 'opacity 1.2s cubic-bezier(0.4,0,0.2,1)';
+        const headerBg = document.getElementById('headerBg');
+        const headerContent = document.getElementById('headerContent');
+        if (headerBg) headerBg.classList.add('visible');
+        if (headerContent) setTimeout(() => headerContent.classList.add('visible'), 500);
+      }
+      // Скрыть видео-интро overlay после анимации header
+      introVideoOverlay.classList.remove('active');
+      setTimeout(() => { introVideoOverlay.style.display = 'none'; }, 700);
+      // Полностью убрать фон для видео
+      if (videoBgOverlay) {
+        videoBgOverlay.classList.remove('active');
+        videoBgOverlay.classList.remove('hide');
+      }
+    }, 700); // столько же, сколько transition у #video-bg-overlay
+  }
+
+  // Обработчик клика по конверту
+  function handleEnvelopeClick() {
+    if (envelopeClicked) return; // Предотвращаем повторные клики
+    envelopeClicked = true;
+
+    // Скрыть текст и стрелку
+    invitationText.style.opacity = '0';
+    arrowContainer.style.opacity = '0';
+
+    // Показать треснувший сургуч
+    envelopeSeal.style.display = 'none';
+    envelopeCracked.style.display = 'block';
+    envelopeCracked.classList.add('show');
+
+    // Запустить видео-интро через 1 секунду после эффекта трещины
+    setTimeout(() => {
+      showVideoIntro();
+    }, 1000);
+  }
+
+  // Инициализация анимации конверта
+  function initEnvelopeAnimation() {
+    // Показать текст и стрелку через 3 секунды (после появления конверта)
+    setTimeout(() => {
+      invitationText.classList.add('show');
+      arrowContainer.classList.add('show');
+    }, 3000);
+  }
+
+  // Добавляем обработчики событий
+  if (envelopeWrapper) {
+    envelopeWrapper.addEventListener('click', handleEnvelopeClick);
+  }
+  if (introVideo) {
+    introVideo.addEventListener('ended', endVideoIntro);
+  }
+
+    // Инициализация при загрузке страницы
+  window.addEventListener('DOMContentLoaded', function() {
+    // Инициализация анимации конверта
+    initEnvelopeAnimation();
+    
+    // Инициализация музыки и обработка автовоспроизведения
+    const introMusic = document.getElementById('intro-music');
+    
+    // Попытка запустить музыку при первом взаимодействии пользователя
+    function tryStartMusic() {
+      if (introMusic && introMusic.paused) {
+        introMusic.volume = 0.7;
+        introMusic.play().catch(() => {});
+      }
+    }
+    
+    // Добавляем обработчики для запуска музыки при взаимодействии
+    document.addEventListener('click', tryStartMusic, { once: true });
+    document.addEventListener('touchstart', tryStartMusic, { once: true });
+    document.addEventListener('keydown', tryStartMusic, { once: true });
+  });
 </script>
+
+<audio id="intro-music" src="worth-the-wait-christian-wedding-song-get-savecom_u4aOGs76.mp3" preload="auto"></audio>
 
 </body>
 </html> 
