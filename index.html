@@ -288,6 +288,94 @@
       margin-bottom: 0;
     }
 
+    /* === SCROLL HINT === */
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      opacity: 0;
+      animation: scrollHintFadeIn 2s ease-out 3s forwards;
+    }
+
+    @keyframes scrollHintFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .scroll-arrow {
+      color: var(--rose);
+      margin-bottom: 8px;
+      animation: scrollBounce 2s ease-in-out infinite;
+      filter: drop-shadow(0 2px 8px rgba(189, 144, 141, 0.3));
+    }
+
+    @keyframes scrollBounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-8px);
+      }
+      60% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .scroll-text {
+      font-family: 'Montserrat', serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--green-dark);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(101, 115, 98, 0.2);
+      opacity: 0.8;
+    }
+
+    /* Скрыть подсказку при скролле */
+    .scroll-hint.hidden {
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+
+    /* Адаптивные стили для подсказки */
+    @media (max-width: 768px) {
+      .scroll-hint {
+        bottom: 20px;
+      }
+      .scroll-text {
+        font-size: 0.8rem;
+      }
+      .scroll-arrow svg {
+        width: 20px;
+        height: 28px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .scroll-hint {
+        bottom: 15px;
+      }
+      .scroll-text {
+        font-size: 0.75rem;
+      }
+      .scroll-arrow svg {
+        width: 18px;
+        height: 26px;
+      }
+    }
+
     /* === MAIN === */
     main {
       margin: 0;
@@ -2477,6 +2565,16 @@
       </h2>
       <p class="header-date"></p>
     </div>
+    
+    <!-- Анимированная стрелка-подсказка -->
+    <div class="scroll-hint" id="scrollHint">
+      <div class="scroll-arrow">
+        <svg width="24" height="32" viewBox="0 0 24 32" fill="none">
+          <path d="M12 2 L12 28 M7 23 L12 28 L17 23" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="scroll-text">Листайте вниз</div>
+    </div>
   </div>
 </header>
 
@@ -3081,6 +3179,18 @@
     // но только если конверт еще не был нажат
     if (!envelopeClicked) {
       setVideoSource();
+    }
+  });
+
+  // Скрыть подсказку при скролле
+  let scrollHintHidden = false;
+  window.addEventListener('scroll', function() {
+    if (!scrollHintHidden && window.scrollY > 100) {
+      const scrollHint = document.getElementById('scrollHint');
+      if (scrollHint) {
+        scrollHint.classList.add('hidden');
+        scrollHintHidden = true;
+      }
     }
   });
 </script>
